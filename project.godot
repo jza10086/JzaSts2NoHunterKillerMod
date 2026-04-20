@@ -16,7 +16,7 @@ config/icon="res://icon.svg"
 
 [dotnet]
 
-project/assembly_name="JzaSts2NoHunterKillerMod"
+project/assembly_name="JzaSts2HunterKillerTweaksMod"
 
 [rendering]
 

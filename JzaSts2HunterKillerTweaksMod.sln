@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JzaSts2NoHunterKillerMod", "JzaSts2NoHunterKillerMod.csproj", "{75B5F0FA-3902-4B43-8723-7CC46AE683EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JzaSts2HunterKillerTweaksMod", "JzaSts2HunterKillerTweaksMod.csproj", "{75B5F0FA-3902-4B43-8723-7CC46AE683EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
