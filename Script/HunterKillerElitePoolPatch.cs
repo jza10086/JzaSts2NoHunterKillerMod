@@ -1,4 +1,5 @@
 using HarmonyLib;
+using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Map;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
@@ -98,5 +99,56 @@ public static class HunterKillerEliteRoomTypePatch
 		{
 			__result = RoomType.Elite;
 		}
+	}
+}
+
+[HarmonyPatch(typeof(EncounterModel), "get_MinGoldReward")]
+public static class HunterKillerMinGoldPatch
+{
+	[HarmonyPostfix]
+	public static void Postfix(EncounterModel __instance, ref int __result)
+	{
+		if (__instance is HunterKillerNormal && HunterKillerEliteGoldHelper.IsCurrentMapPointElite())
+		{
+			__result = HunterKillerEliteGoldHelper.ScaleForPovertyAscension(35);
+		}
+	}
+}
+
+[HarmonyPatch(typeof(EncounterModel), "get_MaxGoldReward")]
+public static class HunterKillerMaxGoldPatch
+{
+	[HarmonyPostfix]
+	public static void Postfix(EncounterModel __instance, ref int __result)
+	{
+		if (__instance is HunterKillerNormal && HunterKillerEliteGoldHelper.IsCurrentMapPointElite())
+		{
+			__result = HunterKillerEliteGoldHelper.ScaleForPovertyAscension(45);
+		}
+	}
+}
+
+public static class HunterKillerEliteGoldHelper
+{
+	private static readonly System.Reflection.PropertyInfo RunManagerStateProperty = AccessTools.Property(typeof(RunManager), "State");
+
+	public static bool IsCurrentMapPointElite()
+	{
+		if (RunManagerStateProperty?.GetValue(RunManager.Instance) is not RunState state)
+		{
+			return false;
+		}
+
+		return state.CurrentMapPoint?.PointType == MapPointType.Elite;
+	}
+
+	public static int ScaleForPovertyAscension(int baseGold)
+	{
+		double gold = baseGold;
+		if (AscensionHelper.HasAscension(AscensionLevel.Poverty))
+		{
+			gold *= AscensionHelper.PovertyAscensionGoldMultiplier;
+		}
+		return (int)gold;
 	}
 }
