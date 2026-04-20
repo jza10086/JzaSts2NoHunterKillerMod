@@ -1,0 +1,11 @@
+{
+  "id": "JzaSts2HunterKillerTweaksMod",         
+  "name": "Jza的杀戮尖塔2猎人杀手修改mod",
+  "author": "jza",
+  "description": "将猎人杀手变为精英。",
+  "version": "0.1.0",
+  "has_pck": true,      
+  "has_dll": true,      
+  "dependencies": [],    
+  "affects_gameplay": false
+}
